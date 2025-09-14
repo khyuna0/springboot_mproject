@@ -1,0 +1,67 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.5.5'
+	id 'io.spring.dependency-management' version '1.1.7'
+	id 'war'
+}
+
+group = 'com.khyuna0'
+version = '0.0.1-SNAPSHOT'
+description = 'khyuna0 board project'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+bootWar { // war 파일 배포파일명
+	archiveBaseName='kboard'
+	archiveFileName='kboard.war'
+	archiveVersion="0.0.0"
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	
+	// thymeleaf
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+  	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+  	
+  	// vaildation
+  	implementation 'org.springframework.boot:spring-boot-starter-validation'
+  	
+  	//spring security
+  	implementation 'org.springframework.boot:spring-boot-starter-validation'
+   	implementation 'org.springframework.boot:spring-boot-starter-security'
+   	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+  	
+	compileOnly 'org.projectlombok:lombok'
+	
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	//runtimeOnly 'com.oracle.database.jdbc:ojdbc11'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	
+	// oracle cloud DB connection
+	implementation "com.oracle.database.jdbc:ojdbc11:23.5.0.24.07"
+
+   // Wallet
+  	 implementation "com.oracle.database.security:oraclepki:23.5.0.24.07"
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
