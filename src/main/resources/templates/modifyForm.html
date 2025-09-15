@@ -2,13 +2,13 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8" />
-  <title>게시글 작성</title>
+  <title>게시글 수정</title>
   <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body>
-  <h2>게시글 작성</h2>
+  <h2>게시글 수정</h2>
 
-  <form th:action="@{|/write|}" th:object="${freeBoard}" method="post">
+  <form th:action="@{|/modify/${freeBoard.id}|}" th:object="${freeBoard}" method="post">
     <div class="form-row">
       <label for="subject">제목</label>
       <input id="subject" type="text" th:field="*{subject}" placeholder="제목 입력" required />
@@ -20,6 +20,7 @@
     </div>
 
     <button type="submit" class="primary">등록</button>
+      <a th:href="@{/freeBoard}">목록으로</a>
   </form>
 </body>
 </html>

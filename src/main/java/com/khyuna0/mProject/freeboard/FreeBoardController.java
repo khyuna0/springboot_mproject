@@ -48,19 +48,25 @@ public class FreeBoardController {
 		return "write";
 	}//
 	
-	@GetMapping("/modify/{id}") 
-	public String modify(Model model, FreeBoard freeBoard, Integer id) { // 글 수정 폼 매핑
+	@PostMapping("/write/{id}") // 글쓰기
+	public String writeOk(Model model, @RequestParam(value ="subject") String subject,  @RequestParam(value ="content") String content) {
+		freeBoardService.create(subject, content);
+		
+		return "redirect:/freeBoard";
+	}
+	
+	@GetMapping("/modify/{id}") // 글 수정 폼 보기
+	public String modify(Model model, FreeBoard freeBoard, @PathVariable("id") Integer id) { // 글 수정 폼 매핑
 		freeBoard = freeBoardService.getFreeBoard(id);
 		model.addAttribute("freeBoard", freeBoard);
 		
-		return "write";
+		return "modifyForm";
 	}//
 	
 	@PostMapping("/modify/{id}") // 선택한 글 수정하기
 	public String modify(Model model, @RequestParam(value ="subject") String subject,  @RequestParam(value ="content") String content, @PathVariable("id") Integer id) {		
 		freeBoardService.modify(id, subject, content);
 
-		return "detail";
+		return String.format("redirect:/detail/%s", id);
 	}//
-	
 }
