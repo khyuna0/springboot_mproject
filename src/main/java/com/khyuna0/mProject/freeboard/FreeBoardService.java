@@ -1,10 +1,12 @@
 package com.khyuna0.mProject.freeboard;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.khyuna0.mProject.DataNotFoundException;
@@ -15,8 +17,9 @@ public class FreeBoardService {
 	@Autowired
 	private FreeBoardRepository boardRepository;
 	
-	public List<FreeBoard> fbList() { // 전체 글 목록 불러오기
-		return boardRepository.findAll();
+	public Page<FreeBoard> getlist(int page) { // 전체 글 목록 불러오기
+		Pageable pageable = PageRequest.of(page, 10);
+		return boardRepository.findAll(pageable);
 	}//
 	
 	public FreeBoard getFreeBoard(Integer id) { // 글 아이디로 글 하나 보기

@@ -3,6 +3,7 @@ package com.khyuna0.mProject.freeboard;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,9 +31,9 @@ public class FreeBoardController {
 	private CommentService commentService;
 	
 	@GetMapping("/freeBoard")
-	public String boardlist(Model model) { // 전체 글 목록 불러오기
-		List<FreeBoard> FList = freeBoardRepository.findAll();
-		model.addAttribute("boardList", FList);
+	public String list(Model model, @RequestParam(value="page", defaultValue = "0") int page) { // 전체 글 목록 불러오기
+		Page<FreeBoard> paging = this.freeBoardService.getlist(page);
+		model.addAttribute("paging", paging);
 		
 		return "freeBoard";
 	}//
