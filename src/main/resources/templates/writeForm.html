@@ -3,23 +3,37 @@
 <head>
   <meta charset="UTF-8" />
   <title>게시글 작성</title>
+  <!-- CSS -->
+  <link rel="stylesheet" th:href="@{/bootstrap.min.css}">
   <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body>
-  <h2>게시글 작성</h2>
+  <div class="container mt-5">
+    <h2 class="mb-4">게시글 작성</h2>
 
-  <form th:action="@{|/write|}" th:object="${freeBoard}" method="post">
-    <div class="form-row">
-      <label for="subject">제목</label>
-      <input id="subject" type="text" th:field="*{subject}" placeholder="제목 입력" required />
-    </div>
+    <form th:action="@{|/write|}" th:object="${freeBoard}" method="post">
+      <!-- 제목 -->
+      <div class="mb-3">
+        <label for="subject" class="form-label">제목</label>
+        <input id="subject" type="text" th:field="*{subject}" 
+               class="form-control" placeholder="제목 입력" required />
+      </div>
 
-    <div class="form-row">
-      <label for="content">내용</label>
-      <textarea id="content" th:field="*{content}" rows="6" placeholder="내용 입력" required></textarea>
-    </div>
+      <!-- 내용 -->
+      <div class="mb-3">
+        <label for="content" class="form-label">내용</label>
+        <textarea id="content" th:field="*{content}" 
+                  class="form-control" rows="6" placeholder="내용 입력" required></textarea>
+      </div>
 
-    <button type="submit" class="primary">등록</button>
-  </form>
+      <!-- 버튼 -->
+      <div class="d-flex justify-content-end">
+        <button type="submit" class="btn btn-primary">등록</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- JS -->
+  <script th:src="@{/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

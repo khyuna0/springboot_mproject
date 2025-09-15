@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+  <meta charset="UTF-8">
+  <title>freeBoard</title>
+  <link rel="stylesheet" th:href="@{/bootstrap.min.css}">
+</head>
+<body>
+  <!-- 네비게이션 바 -->
+  <nav th:fragment="navbarFragment" class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+    <div class="container-fluid">
+      <!-- 로고 -->
+      <a class="navbar-brand fw-bold" th:href="@{/}">freeBoard</a>
+
+      <!-- 햄버거 버튼 (모바일용) -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+              data-bs-target="#navbarNav" aria-controls="navbarNav" 
+              aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- 메뉴 -->
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/login}">로그인</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/logout}">로그아웃</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/join}">회원가입</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 본문 영역 -->
+  <main class="container mt-4">
+    <th:block layout:fragment="content"></th:block>
+  </main>
+
+  <!-- JS -->
+  <script th:src="@{/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

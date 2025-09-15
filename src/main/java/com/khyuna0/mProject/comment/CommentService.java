@@ -25,12 +25,12 @@ public class CommentService {
 //	@Autowired
 //	private FreeBoardService freeBoardService;
 	
-	public void create(FreeBoard freeBoard, String content, UserInfo author) { // 댓글 작성
+	public void create(FreeBoard freeBoard, String content) { // 댓글 작성
 		
 		Comment comment = new Comment();
 		comment.setContent(content);
 		comment.setCreateDate(LocalDateTime.now());
-		comment.setAuthor(author); 
+		comment.setAuthor(freeBoard.getAuthor()); 
 		comment.setFreeBoard(freeBoard); 
 		commentRepository.save(comment);
 		}
@@ -42,9 +42,31 @@ public class CommentService {
 			return optional.get();
 		} else {
 			throw new DataNotFoundException("댓글이 존재하지 않습니다.");
+		}	
+	}
+		
+	public void modify(Integer id, String content) { // 댓글 수정
+		Optional<Comment> cOptional = commentRepository.findById(id); // 댓글 기본 키로 조회
+		
+		if(cOptional.isPresent()) {
+			Comment comment = cOptional.get();
+			comment.setContent(content);
+			commentRepository.save(comment);
+		} else {
+			throw new DataNotFoundException("글을 찾지 못했습니다.");
+		}
+	}
+	
+	public void deleteComment(Integer id, Comment comment) {
+		Optional<Comment> cOptional = commentRepository.findById(id); // 기본 키 조회
+		
+		if(cOptional.isPresent()) {
+			commentRepository.delete(comment);
 		}
 		
 	}
+	
+	
 }
 	
 

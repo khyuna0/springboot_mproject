@@ -10,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
@@ -44,10 +45,12 @@ public class Comment { // 자유게시판 댓글
 	
 	// n : 1
 	@ManyToOne
+	@JoinColumn(name = "AUTHOR_USERID")  // USER_INFO 테이블 PK와 매핑
 	private UserInfo author; // 댓글 글쓴이
 	
 	// n : 1
-	@ManyToOne
+	@ManyToOne 
+	@JoinColumn(name = "FREE_BOARD_ID")  // USER_INFO 테이블 PK와 매핑
 	private FreeBoard freeBoard; // 댓글 부모글
 	
 }

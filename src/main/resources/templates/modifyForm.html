@@ -3,24 +3,46 @@
 <head>
   <meta charset="UTF-8" />
   <title>게시글 수정</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- CSS -->
   <link rel="stylesheet" th:href="@{/style.css}">
+  <link rel="stylesheet" th:href="@{/bootstrap.min.css}">
 </head>
 <body>
-  <h2>게시글 수정</h2>
+  <div class="container mt-5">
+    <div class="card shadow-sm">
+      <div class="card-header bg-primary text-white">
+        <h2 class="mb-0">게시글 수정</h2>
+      </div>
+      <div class="card-body">
+        <form th:action="@{|/modify/${freeBoard.id}|}" th:object="${freeBoard}" method="post">
+          
+          <!-- 제목 -->
+          <div class="mb-3">
+            <label for="subject" class="form-label">제목</label>
+            <input id="subject" type="text" class="form-control" 
+                   th:field="*{subject}" placeholder="제목 입력" required />
+          </div>
 
-  <form th:action="@{|/modify/${freeBoard.id}|}" th:object="${freeBoard}" method="post">
-    <div class="form-row">
-      <label for="subject">제목</label>
-      <input id="subject" type="text" th:field="*{subject}" placeholder="제목 입력" required />
+          <!-- 내용 -->
+          <div class="mb-3">
+            <label for="content" class="form-label">내용</label>
+            <textarea id="content" class="form-control" 
+                      th:field="*{content}" rows="6" placeholder="내용 입력" required></textarea>
+          </div>
+
+          <!-- 버튼 -->
+          <div class="d-flex justify-content-between">
+            <a th:href="@{/freeBoard}" class="btn btn-secondary">목록으로</a>
+            <button type="submit" class="btn btn-primary">수정 완료</button>
+          </div>
+        </form>
+      </div>
     </div>
+  </div>
 
-    <div class="form-row">
-      <label for="content">내용</label>
-      <textarea id="content" th:field="*{content}" rows="6" placeholder="내용 입력" required></textarea>
-    </div>
-
-    <button type="submit" class="primary">등록</button>
-      <a th:href="@{/freeBoard}">목록으로</a>
-  </form>
+  <!-- JS -->
+  <script th:src="@{/bootstrap.min.js}"></script>
 </body>
 </html>

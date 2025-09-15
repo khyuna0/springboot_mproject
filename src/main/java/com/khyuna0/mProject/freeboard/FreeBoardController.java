@@ -74,4 +74,13 @@ public class FreeBoardController {
 
 		return String.format("redirect:/detail/%s", id);
 	}//
+	
+	@GetMapping("/delete/{id}") // 글 삭제
+	public String delete(FreeBoard freeBoard, @PathVariable("id") Integer id) {
+		freeBoard = freeBoardService.getFreeBoard(id);
+		freeBoardService.delete(freeBoard);
+		
+		return "redirect:/freeBoard";
+	}
+	
 }

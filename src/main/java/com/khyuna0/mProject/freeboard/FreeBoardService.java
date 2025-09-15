@@ -21,6 +21,8 @@ public class FreeBoardService {
 	
 	public FreeBoard getFreeBoard(Integer id) { // 글 아이디로 글 하나 보기
 		Optional<FreeBoard> frOptional = boardRepository.findById(id);
+		
+		
 		if (frOptional.isPresent()) {
 			FreeBoard freeBoard = frOptional.get();
 			return freeBoard;
@@ -56,7 +58,7 @@ public class FreeBoardService {
 		boardRepository.delete(freeboard);
 	}//
 	
-	public void hit(FreeBoard freeboard) { // 글 조회수 증가 (오류 있음)
+	public void hit(FreeBoard freeboard) { // 글 조회수 증가
 		freeboard.setHit(freeboard.getHit()+1);
 		boardRepository.save(freeboard);
 

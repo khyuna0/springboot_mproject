@@ -6,39 +6,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <!-- CSS -->
-  <link rel="stylesheet" th:href="@{/style.css}">
   <link rel="stylesheet" th:href="@{/bootstrap.min.css}">
+  <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body>
-  <div class="container">
-    <h2>회원가입</h2>
+  <div class="container mt-5" style="max-width: 500px;">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h3 class="card-title text-center mb-4">회원가입</h3>
 
-    <form th:action="@{/join}" th:object="${userInfo}" method="post" autocomplete="off">
-      <div class="form-row">
-        <label for="username">이름</label>
-        <input id="username" type="text" th:field="*{username}" placeholder="이름" required />
+        <form th:action="@{/join}" th:object="${userInfo}" method="post" autocomplete="off">
+          
+          <div class="mb-3">
+            <label for="username" class="form-label">이름</label>
+            <input id="username" type="text" class="form-control" th:field="*{username}" placeholder="이름" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="useremail" class="form-label">이메일</label>
+            <input id="useremail" type="email" class="form-control" th:field="*{useremail}" placeholder="example@mail.com" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="userage" class="form-label">나이</label>
+            <input id="userage" type="number" class="form-control" th:field="*{userage}" placeholder="나이">
+          </div>
+
+          <div class="mb-3">
+            <label for="userpw" class="form-label">비밀번호</label>
+            <input id="userpw" type="password" class="form-control" th:field="*{userpw}" placeholder="비밀번호" required>
+          </div>
+
+          <div class="d-grid">
+            <button class="btn btn-primary" type="submit">회원가입</button>
+          </div>
+        </form>
       </div>
-
-      <div class="form-row">
-        <label for="useremail">이메일</label>
-        <input id="useremail" type="email" th:field="*{useremail}" placeholder="example@mail.com" required />
-      </div>
-
-      <div class="form-row">
-        <label for="userage">나이</label>
-        <input id="userage" type="text" th:field="*{userage}" placeholder="나이" />
-      </div>
-
-      <div class="form-row">
-        <label for="userpw">비밀번호</label>
-        <input id="userpw" type="password" th:field="*{userpw}" placeholder="비밀번호" required />
-      </div>
-
-      <button class="primary" type="submit">회원가입</button>
-    </form>
+    </div>
   </div>
 
-  <!-- JS  -->
+  <!-- JS -->
   <script th:src="@{/bootstrap.min.js}"></script>
 </body>
 </html>
