@@ -1,7 +1,9 @@
 package com.khyuna0.mProject.freeboard;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
+import com.khyuna0.mProject.comment.Comment;
 import com.khyuna0.mProject.userinfo.UserInfo;
 
 import jakarta.persistence.Column;
@@ -10,6 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -47,8 +50,13 @@ public class FreeBoard {
 	@Column
 	private LocalDateTime createdate; // 작성 시간
 	
-	//n : 1
+	// n : 1
 	@ManyToOne
 	private UserInfo author; // 글쓴이 정보
+	
+	// 1 : n
+	@OneToMany
+	private List<Comment> comments; // 부모 글에 달린 댓글 목록
+	
 	
 }

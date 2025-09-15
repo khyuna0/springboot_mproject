@@ -22,7 +22,8 @@ public class FreeBoardService {
 	public FreeBoard getFreeBoard(Integer id) { // 글 아이디로 글 하나 보기
 		Optional<FreeBoard> frOptional = boardRepository.findById(id);
 		if (frOptional.isPresent()) {
-			return frOptional.get();
+			FreeBoard freeBoard = frOptional.get();
+			return freeBoard;
 		} else {
 			throw new DataNotFoundException("글을 찾지 못했습니다.");
 		}

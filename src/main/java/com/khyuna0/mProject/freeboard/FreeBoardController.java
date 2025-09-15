@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.khyuna0.mProject.comment.Comment;
+import com.khyuna0.mProject.comment.CommentService;
 import com.khyuna0.mProject.userinfo.UserInfoService;
 
 @Controller
@@ -24,6 +26,9 @@ public class FreeBoardController {
 	@Autowired
 	private UserInfoService infoService;
 	
+	@Autowired
+	private CommentService commentService;
+	
 	@GetMapping("/freeBoard")
 	public String boardlist(Model model) { // 전체 글 목록 불러오기
 		List<FreeBoard> FList = freeBoardRepository.findAll();
@@ -33,19 +38,19 @@ public class FreeBoardController {
 	}//
 	
 	@GetMapping("/detail/{id}")
-	public String detail(Model model, @PathVariable("id") Integer id) { // 선택한 글 상세 보기
-//		freeBoardService.hit(freeBoardService.getFreeBoard(id));
+	public String detail(Model model, @PathVariable("id") Integer id, Comment comment) { // 선택한 글 상세 보기
+		freeBoardService.hit(freeBoardService.getFreeBoard(id));
 		FreeBoard freeBoard = freeBoardService.getFreeBoard(id);
 		
 		model.addAttribute("freeBoard", freeBoard);
-		return "detail";
+		return "freeBoard_detail";
 	}//
 	
 	@GetMapping("/write") 
 	public String write(Model model, FreeBoard freeBoard) { // 글쓰기 폼 매핑만
 		
 		model.addAttribute("freeBoard", freeBoard);
-		return "write";
+		return "writeForm";
 	}//
 	
 	@PostMapping("/write/{id}") // 글쓰기

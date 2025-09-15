@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>게시글 상세</title>
+</head>
+<body>
+  <h2 th:text="${freeBoard.subject}"></h2>
+  <p>작성일: <span th:text="${#temporals.format(freeBoard.createdate, 'yyyy-MM-dd HH:mm')}"></span></p>
+  <p>조회수: <span th:text="${freeBoard.hit}"></span></p>
+  <hr>
+  <p th:text="${freeBoard.content}"></p>
+  <a th:href="@{/freeBoard}">목록으로</a>
+  <a th:href="@{|/modify/${freeBoard.id}|}">수정하기</a>
+  
+  <hr><br>
+<form th:action="@{|/comment/${freeBoard.id}|}" th:object="${comment}" method="post">
+  <div class="form-row">
+    <h3>댓글 입력</h3>
+    <div class="form-row">
+      <label for="content">내용</label>
+      <textarea id="content" th:field="*{content}" rows="10" col="50" placeholder="댓글 입력" required></textarea>
+    </div>
+    <button type="submit" class="primary">등록</button>
+  </div>
+</form>
+
+<hr><br> 
+      <tr th:each="comment : ${freeBoard.comments}">
+        <td th:text="${comment.author.username}">댓글 작성자</td>
+        <td>
+          <a th:text="${comment.content}">댓글 내용</a>
+        </td>
+		</tr>
+
+</body>
+</html>
+
