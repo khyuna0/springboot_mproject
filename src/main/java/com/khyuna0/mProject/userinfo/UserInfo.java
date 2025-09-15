@@ -1,5 +1,7 @@
 package com.khyuna0.mProject.userinfo;
 
+import org.hibernate.validator.constraints.UniqueElements;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,6 +35,7 @@ public class UserInfo {
 	private Integer userid; // 유저 고유 번호 (pk)
 	
 	@Column
+	@UniqueElements
 	private String useremail; // 유저 이메일 (아이디 번호처럼 사용)
 	
 	@Column

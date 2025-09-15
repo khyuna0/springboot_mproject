@@ -1,5 +1,7 @@
 package com.khyuna0.mProject.comment;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,8 +22,9 @@ public class CommentController {
 	private FreeBoardService freeBoardService;
 	
 	@PostMapping(value = "/comment/{id}")
-	public String comment(@PathVariable("id") Integer id, FreeBoard freeBoard, @RequestParam(value = "content") String content) {
+	public String comment(@PathVariable("id") Integer id, FreeBoard freeBoard, @RequestParam(value = "content") String content, Principal principal) {
 		freeBoard = freeBoardService.getFreeBoard(id);
+		
 		commentService.create(freeBoard, content);
 		
 		return String.format("redirect:/detail/%s", id);
