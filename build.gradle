@@ -59,7 +59,9 @@ dependencies {
 	implementation "com.oracle.database.jdbc:ojdbc11:23.5.0.24.07"
 
    // Wallet
-  	 implementation "com.oracle.database.security:oraclepki:23.5.0.24.07"
+  	implementation "com.oracle.database.security:oraclepki:23.5.0.24.07"
+   //implementation "com.oracle.database.security:osdt_core"
+   //implementation "com.oracle.database.security:osdt_cert"
 }
 
 tasks.named('test') {
