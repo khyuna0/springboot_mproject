@@ -1,5 +1,66 @@
 package com.khyuna0.mProject.freeboard;
 
-public class FreeBoardController {
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.khyuna0.mProject.userinfo.UserInfoService;
+
+@Controller
+public class FreeBoardController {
+	
+	@Autowired
+	private FreeBoardService freeBoardService;
+	
+	@Autowired
+	private FreeBoardRepository freeBoardRepository;
+	
+	@Autowired
+	private UserInfoService infoService;
+	
+	@GetMapping("/freeBoard")
+	public String boardlist(Model model) { // 전체 글 목록 불러오기
+		List<FreeBoard> FList = freeBoardRepository.findAll();
+		model.addAttribute("boardList", FList);
+		
+		return "freeBoard";
+	}//
+	
+	@GetMapping("/detail/{id}")
+	public String detail(Model model, @PathVariable("id") Integer id) { // 선택한 글 상세 보기
+//		freeBoardService.hit(freeBoardService.getFreeBoard(id));
+		FreeBoard freeBoard = freeBoardService.getFreeBoard(id);
+		
+		model.addAttribute("freeBoard", freeBoard);
+		return "detail";
+	}//
+	
+	@GetMapping("/write") 
+	public String write(Model model, FreeBoard freeBoard) { // 글쓰기 폼 매핑만
+		
+		model.addAttribute("freeBoard", freeBoard);
+		return "write";
+	}//
+	
+	@GetMapping("/modify/{id}") 
+	public String modify(Model model, FreeBoard freeBoard, Integer id) { // 글 수정 폼 매핑
+		freeBoard = freeBoardService.getFreeBoard(id);
+		model.addAttribute("freeBoard", freeBoard);
+		
+		return "write";
+	}//
+	
+	@PostMapping("/modify/{id}") // 선택한 글 수정하기
+	public String modify(Model model, @RequestParam(value ="subject") String subject,  @RequestParam(value ="content") String content, @PathVariable("id") Integer id) {		
+		freeBoardService.modify(id, subject, content);
+
+		return "detail";
+	}//
+	
 }

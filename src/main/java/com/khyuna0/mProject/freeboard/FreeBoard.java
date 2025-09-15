@@ -2,11 +2,14 @@ package com.khyuna0.mProject.freeboard;
 
 import java.time.LocalDateTime;
 
+import com.khyuna0.mProject.userinfo.UserInfo;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -44,5 +47,8 @@ public class FreeBoard {
 	@Column
 	private LocalDateTime createdate; // 작성 시간
 	
+	//n : 1
+	@ManyToOne
+	private UserInfo author; // 글쓴이 정보
 	
 }

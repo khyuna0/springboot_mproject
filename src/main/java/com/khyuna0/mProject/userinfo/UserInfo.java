@@ -42,7 +42,7 @@ public class UserInfo {
 	private String username; // 유저 이름(실명)
 	 
 	@Column
-	private String userage;
+	private int userage;
 	
 	
 }

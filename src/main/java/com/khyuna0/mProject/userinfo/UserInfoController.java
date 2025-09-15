@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class UserInfoController {
 
 	@Autowired
-	private UserInfoService uService;
+	private UserInfoService userService;
 	
 	
     @GetMapping("/join")
@@ -23,9 +23,15 @@ public class UserInfoController {
 
     @PostMapping("/join")
     public String joinSubmit(@ModelAttribute UserInfo userInfo) {
-    		  		
+    	
+    	//userService.create(null, null, null, null);
         System.out.println("가입된 유저: " + userInfo.getUsername());
         return "redirect:/";
+    }
+    
+    @GetMapping("/login")
+    public String login() {
+    	return "login";
     }
 }
 

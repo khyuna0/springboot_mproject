@@ -10,7 +10,7 @@ public class UserInfoService {
 	private UserInfoRepository userInfoRepository;
 	
 	// 회원가입
-	public void create(String useremail, String userpw, String username, String userage) {
+	public void create(String useremail, String userpw, String username, int userage) {
 		
 		UserInfo user = new UserInfo();
 		user.setUseremail(useremail);
