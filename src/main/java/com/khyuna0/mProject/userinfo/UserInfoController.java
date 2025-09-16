@@ -1,6 +1,7 @@
 package com.khyuna0.mProject.userinfo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -29,7 +30,17 @@ public class UserInfoController {
     	if(bindingResult.hasErrors()) {
     		return "join";
     	} 
-    	userService.create(userInfo.getUseremail() , userInfo.getUserpw(), userInfo.getUsername(), userInfo.getUserage());
+    	try {
+    		userService.create(userInfo.getUsername(),userInfo.getUserpw(),userInfo.getUseremail(),userInfo.getRealname());
+    	} catch (DataIntegrityViolationException e) {
+			e.printStackTrace();
+			bindingResult.reject("joinFailed", "이미 등록된 사용자입니다.");
+			return "join";
+		} catch (Exception e) {
+			bindingResult.reject("joinFailed", e.getMessage());
+			return "join";
+		}
+    	
     	return "redirect:/freeBoard";
     }
     
@@ -37,5 +48,6 @@ public class UserInfoController {
     public String login() {
     	return "login";
     }
+    
 }
 

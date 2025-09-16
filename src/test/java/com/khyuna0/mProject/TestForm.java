@@ -13,7 +13,7 @@ public class TestForm {
 	private FreeBoardService boardService;
 	
 	@Test
-	public void dummy() {
+	public void test() {
 		
 	}
 }

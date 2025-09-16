@@ -30,7 +30,7 @@ import lombok.Setter;
 @Table (name = "freeboard")
 @SequenceGenerator (
 		name= "FREEBOARD_SEQ_GENERATOR", // JPA 내부 시퀀스 이름
-		sequenceName ="FREEBOARD_SEQ_", // 실제 DB에 있는 시퀀스 이름 
+		sequenceName ="FREEBOARD_SEQ", // 실제 DB에 있는 시퀀스 이름 
 		initialValue = 1, // 시퀀스의 시작 값
 		allocationSize = 1 // 시퀀스의 증가치 
 		)
@@ -60,5 +60,9 @@ public class FreeBoard {
 	@OneToMany(mappedBy = "freeBoard", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Comment> comments; // 부모 글에 달린 댓글 목록
 	
+	public void addComment(Comment comment) {
+	    comments.add(comment);
+	    comment.setFreeBoard(this);
+	}
 	
 }

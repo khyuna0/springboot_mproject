@@ -1,14 +1,5 @@
-<!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8" />
-  <title>게시글 작성</title>
-  <!-- CSS -->
-  <link rel="stylesheet" th:href="@{/bootstrap.min.css}">
-  <link rel="stylesheet" th:href="@{/style.css}">
-</head>
-<body>
-  <div class="container mt-5">
+<html layout:decorate="~{layout}">
+	<div layout:fragment="content" class="container mt-5">
     <h2 class="mb-4">게시글 작성</h2>
 
     <form th:action="@{|/write|}" th:object="${freeBoard}" method="post">

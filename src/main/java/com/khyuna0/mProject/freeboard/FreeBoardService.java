@@ -1,15 +1,20 @@
 package com.khyuna0.mProject.freeboard;
 
+import java.security.Principal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.khyuna0.mProject.DataNotFoundException;
+import com.khyuna0.mProject.userinfo.UserInfo;
 
 @Service
 public class FreeBoardService {
@@ -18,13 +23,15 @@ public class FreeBoardService {
 	private FreeBoardRepository boardRepository;
 	
 	public Page<FreeBoard> getlist(int page) { // 전체 글 목록 불러오기
-		Pageable pageable = PageRequest.of(page, 10);
+		List<Sort.Order> sorts =new ArrayList<>();
+		sorts.add(Sort.Order.desc("createdate"));
+		
+		Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
 		return boardRepository.findAll(pageable);
 	}//
 	
 	public FreeBoard getFreeBoard(Integer id) { // 글 아이디로 글 하나 보기
 		Optional<FreeBoard> frOptional = boardRepository.findById(id);
-		
 		
 		if (frOptional.isPresent()) {
 			FreeBoard freeBoard = frOptional.get();
@@ -34,11 +41,13 @@ public class FreeBoardService {
 		}
 	}//
 	
-	public void create(String subject, String content) { // 글 쓰기
+	public void create(String subject, String content, UserInfo user ) { // 글 쓰기
+		
 		FreeBoard freeBoard = new FreeBoard();
 		freeBoard.setSubject(subject);
 		freeBoard.setContent(content);
 		freeBoard.setHit(0);
+		freeBoard.setAuthor(user);
 		freeBoard.setCreatedate(LocalDateTime.now());
 		
 		boardRepository.save(freeBoard);

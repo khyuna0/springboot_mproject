@@ -15,12 +15,13 @@ public class joinTest {
 	@Test
 	public void joinTest() { // 회원 가입 테스트 (valid 없음)
 		
+		String username = "tiger";
 		String useremail = "hong@abc.com";
 		String userpw = "12345";
-		String username = "홍";
-		int userage = 21;
+		String realname = "홍";
+
 		
-		service.create(useremail, userpw, username, userage);
+		service.create(username, userpw, useremail, realname);
 	}
 	
 }
