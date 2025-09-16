@@ -32,8 +32,8 @@ public class UserInfo {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USERINFO_SEQ_GENERATOR")
 	private Integer userid; // 유저 고유 번호 (pk)
 	
-	@Column
-	private String username; // 유저 이름(실명)
+	@Column(unique = true)
+	private String username; // 유저 아이디
 	
 	@Column
 	private String userpw; // 유저 비밀번호

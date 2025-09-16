@@ -1,0 +1,30 @@
+<html layout:decorate="~{layout}">
+	<div layout:fragment="content" class="card">
+  <div class="card-body">
+    <h3 class="card-title text-center mb-4">내 정보</h3>
+
+    <form th:object="${userInfo}" autocomplete="off">
+      <div class="mb-3">
+        <label for="username" class="form-label">아이디</label>
+        <input id="username" type="text" class="form-control" th:field="*{username}" readonly>
+      </div>
+
+      <div class="mb-3">
+        <label for="useremail" class="form-label">이메일</label>
+        <input id="useremail" type="email" class="form-control" th:field="*{useremail}" readonly>
+      </div>
+
+      <div class="mb-3">
+        <label for="realname" class="form-label">실명</label>
+        <input id="realname" type="text" class="form-control" th:field="*{realname}" readonly>
+      </div>
+
+      <div class="d-grid">
+        <a th:href="@{/modifyUser}" class="btn btn-primary">수정하기</a>
+      </div>
+    </form>
+  </div>
+  
+</div>
+</body>
+</html>

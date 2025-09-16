@@ -1,0 +1,44 @@
+<div class="card mt-4">
+  <div class="card-body">
+    <h3 class="card-title text-center mb-4">상담 예약</h3>
+
+    <form th:action="@{/reserve}" th:object="${reservation}" method="post">
+      
+      <!-- 이름 -->
+      <div class="mb-3">
+        <label for="name" class="form-label">이름</label>
+        <input id="name" type="text" class="form-control" th:field="*{name}" placeholder="이름을 입력하세요" required>
+      </div>
+
+      <!-- 이메일 -->
+      <div class="mb-3">
+        <label for="email" class="form-label">이메일</label>
+        <input id="email" type="email" class="form-control" th:field="*{email}" placeholder="이메일 주소" required>
+      </div>
+
+      <!-- 상담 날짜 -->
+      <div class="mb-3">
+        <label for="date" class="form-label">상담 날짜</label>
+        <input id="date" type="date" class="form-control" th:field="*{date}" required>
+      </div>
+
+      <!-- 상담 시간 -->
+      <div class="mb-3">
+        <label for="time" class="form-label">상담 시간</label>
+        <input id="time" type="time" class="form-control" th:field="*{time}" required>
+      </div>
+
+      <!-- 상담 주제 -->
+      <div class="mb-3">
+        <label for="topic" class="form-label">상담 주제</label>
+        <textarea id="topic" class="form-control" rows="3" th:field="*{topic}" placeholder="상담 내용을 간략히 적어주세요"></textarea>
+      </div>
+
+      <!-- 버튼 -->
+      <div class="d-grid">
+        <button type="submit" class="btn btn-primary">예약하기</button>
+      </div>
+
+    </form>
+  </div>
+</div>

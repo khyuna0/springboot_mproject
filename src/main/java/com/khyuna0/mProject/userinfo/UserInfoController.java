@@ -1,7 +1,10 @@
 package com.khyuna0.mProject.userinfo;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -47,6 +50,15 @@ public class UserInfoController {
     @GetMapping("/login")
     public String login() {
     	return "login";
+    }
+    
+    @GetMapping("/mypage")
+    @PreAuthorize("isAuthenticated()")
+    public String mypage(Model model, Principal principal, UserInfo userInfo ) {
+    	userInfo = userService.getUser(principal.getName());
+    	model.addAttribute("userInfo", userInfo);
+   
+    	return "mypage";
     }
     
 }

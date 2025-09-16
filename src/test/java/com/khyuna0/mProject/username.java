@@ -6,22 +6,22 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.khyuna0.mProject.freeboard.FreeBoard;
-import com.khyuna0.mProject.freeboard.FreeBoardRepository;
+
+import com.khyuna0.mProject.userinfo.UserInfo;
+import com.khyuna0.mProject.userinfo.UserInfoRepository;
 
 
 @SpringBootTest
 public class username {
 	
 	@Autowired
-	private FreeBoardRepository freeBoardRepository;
+	private UserInfoRepository userInfoRepository;
 	
 	@Test 
 	public void getUser() {
-		Optional<FreeBoard> free = freeBoardRepository.findById(50);
-		if(free.isPresent()) {
-			String id = free.get().getAuthor().getRealname();
-			System.out.println(id);
+		Optional<UserInfo> user = userInfoRepository.findByUsername("tiger");
+		if(user.isPresent()) {
+			System.out.println(user.get().getUsername());
 		} else {
 			System.out.println("실패");
 		}

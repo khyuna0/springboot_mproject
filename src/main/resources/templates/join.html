@@ -5,7 +5,9 @@
         <h3 class="card-title text-center mb-4">회원가입</h3>
 
         <form th:action="@{/join}" th:object="${userInfo}" method="post" autocomplete="off">
-          
+          	
+          <div th:replace="~{form_errors :: formErrorsFragment}"></div>
+          	
           <div class="mb-3">
             <label for="username" class="form-label">아이디</label>
             <input id="username" type="text" class="form-control" th:field="*{username}" placeholder="아이디" required>

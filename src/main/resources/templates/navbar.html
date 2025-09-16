@@ -22,6 +22,13 @@
           <li class="nav-item">
             <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/join}">회원가입</a>
           </li>
+         <li class="nav-item">
+            <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/reserve}">예약</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/mypage}">내 정보</a>
+          </li>
+          
         </ul>
       </div>
     </div>
