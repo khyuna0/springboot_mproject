@@ -2,7 +2,6 @@ package com.khyuna0.mProject.userinfo;
 
 import java.util.List;
 
-import com.khyuna0.mProject.comment.Comment;
 import com.khyuna0.mProject.reservation.Reservation;
 
 import jakarta.persistence.CascadeType;

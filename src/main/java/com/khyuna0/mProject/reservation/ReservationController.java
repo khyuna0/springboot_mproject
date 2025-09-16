@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.khyuna0.mProject.userinfo.UserInfo;
 import com.khyuna0.mProject.userinfo.UserInfoService;
@@ -42,5 +43,26 @@ public class ReservationController {
 		return "redirect:/mypage";
 	}
 	
+	@GetMapping("/reserve_delete")
+	public String reserve_delete() {
+		
+		
+		return "redirect:/mypage";
+	}
+	
+	@GetMapping("/reserve_modify/{id}")
+	public String reserve_modify(@RequestParam("id") Integer id, Principal principal) {
+		
+		
+		
+		return "redirect:/mypage";
+	}
+	
+	@PostMapping("/reserve_modify")
+	public String reserve_modify() {
+		
+		
+		return "redirect:/mypage";
+	}
 	
 }

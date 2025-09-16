@@ -1,7 +1,5 @@
 package com.khyuna0.mProject.reservation;
 
-import java.time.LocalDateTime;
-
 import com.khyuna0.mProject.userinfo.UserInfo;
 
 import jakarta.persistence.Column;

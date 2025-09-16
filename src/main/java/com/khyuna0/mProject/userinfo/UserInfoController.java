@@ -28,7 +28,7 @@ public class UserInfoController {
     }
 
     @PostMapping("/join")
-    public String joinSubmit(@Valid UserInfoForm userInfo, BindingResult bindingResult) {
+    public String joinSubmit(Model model, @Valid UserInfoForm userInfo, BindingResult bindingResult) {
     	
     	if(bindingResult.hasErrors()) {
     		return "join";
@@ -44,7 +44,7 @@ public class UserInfoController {
 			return "join";
 		}
     	
-    	return "redirect:/freeBoard";
+    	return "freeBoard";
     }
     
     @GetMapping("/login")
