@@ -1,16 +1,5 @@
-<!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8" />
-  <title>게시글 수정</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <!-- CSS -->
-  <link rel="stylesheet" th:href="@{/style.css}">
-  <link rel="stylesheet" th:href="@{/bootstrap.min.css}">
-</head>
-<body>
-  <div class="container mt-5">
+<html layout:decorate="~{layout}">
+  <div layout:fragment="content" class="container mt-5">
     <div class="card shadow-sm">
       <div class="card-header bg-primary text-white">
         <h2 class="mb-0">게시글 수정</h2>
@@ -29,7 +18,7 @@
           <div class="mb-3">
             <label for="content" class="form-label">내용</label>
             <textarea id="content" class="form-control" 
-                      th:field="*{content}" rows="6" placeholder="내용 입력" required></textarea>
+                      th:field="*{content}" rows="8" placeholder="내용 입력" required></textarea>
           </div>
 
           <!-- 버튼 -->
@@ -41,8 +30,4 @@
       </div>
     </div>
   </div>
-
-  <!-- JS -->
-  <script th:src="@{/bootstrap.min.js}"></script>
-</body>
 </html>

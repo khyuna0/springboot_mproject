@@ -25,8 +25,10 @@ public class ReservationService {
 		
 	}
 	
-	private void getReservation(Integer id) {
-		reservationRepository.findById(id);
+	public Reservation getReservation(Integer id) {
+		Optional<Reservation> reOptional = reservationRepository .findById(id);
+		
+		return reOptional.get();
 	}
 	
 	public void delete(Integer id) { // 예약삭제

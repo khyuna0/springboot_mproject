@@ -10,6 +10,6 @@ public class MainController {
 	
 	@GetMapping(value ="/")
 	public String root(Model model) {
-		return "redirect:/freeBoard";
+		return "index";
 	}
 }

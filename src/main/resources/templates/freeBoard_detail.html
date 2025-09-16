@@ -1,84 +1,56 @@
 <html layout:decorate="~{layout}">
-	<div layout:fragment="content" class="container my-4">
-
-  <!-- 게시글 상세 -->
-  <div class="card mb-4">
-    <div class="card-body">
-      <h2 class="card-title" th:text="${freeBoard.subject}">제목</h2>
-      <p class="text-muted mb-2">
-        작성일:
-        <span th:text="${#temporals.format(freeBoard.createdate, 'yyyy-MM-dd HH:mm')}">2025-09-15 12:00</span>
-        | 조회수:
-        <span th:text="${freeBoard.hit}">0</span>
-        | 작성자:
-        <span th:text="${freeBoard.author.realname}">0</span>
-      </p>
-      <hr>
-      <p class="card-text" th:text="${freeBoard.content}">게시글 내용</p>
-      <div class="mt-3">
-        <a th:href="@{/freeBoard}" class="btn btn-secondary btn-sm">목록으로</a>
-        <a th:href="@{|/modify/${freeBoard.id}|}" sec:authorize="isAuthenticated" 
-        	th:if="${freeBoard.author.username != null and freeBoard.author.username == #authentication.getPrincipal().getUsername}" class="btn btn-primary btn-sm">수정하기</a>
-        <a th:href="@{|/delete/${freeBoard.id}|}" sec:authorize="isAuthenticated" 
-         	th:if="${freeBoard.author.username != null and freeBoard.author.username == #authentication.getPrincipal().getUsername}" class="delete btn btn-primary btn-sm">삭제하기</a>
-      </div>
-    </div>
-  </div>
+<div layout:fragment="content" class="container my-4">
 
   <!-- 댓글 입력 -->
-  <div class="card mb-4">
+  <div class="card mb-4 shadow-sm">
     <div class="card-body">
       <h4 class="card-title">댓글 입력</h4>
       <form th:action="@{|/comment/${freeBoard.id}|}" th:object="${comment}" method="post">
         <div class="mb-3">
-          <label for="content" class="form-label"></label>
-          <textarea id="content"  sec:authorize="isAuthenticated" th:field="*{content}" rows="4"
+          <textarea id="content" sec:authorize="isAuthenticated"
+                    th:field="*{content}" rows="3"
                     class="form-control" placeholder="댓글을 입력하세요" required></textarea>
         </div>
-        <button type="submit" sec:authorize="isAuthenticated" class="btn btn-success">등록</button>
+        <button type="submit" sec:authorize="isAuthenticated" class="btn btn-primary btn-sm">등록</button>
       </form>
     </div>
   </div>
 
-<!-- 댓글 목록 -->
-<div class="card mt-4">
-  <div class="card-body">
-    <h4 class="card-title">댓글 목록</h4>
+  <!-- 댓글 목록 -->
+  <div class="card mt-4 shadow-sm">
+    <div class="card-body">
+      <h4 class="card-title">댓글 목록</h4>
 
-    <div th:each="comment, stat : ${freeBoard.comments}" class="card mb-2 p-2">
-      <div class="card-body p-2">
-        <!-- 상단: 댓글 번호 , 수정/삭제 버튼 -->
-        <div class="d-flex justify-content-between align-items-center mb-1">
-          <h6 class="mb-0 text-muted">
-            #<span th:text="${stat.index + 1}"></span><br>
-            작성자: <span th:text="${comment.author.realname}">작성자</span>
-          </h6>
-          <div>
-			<a th:href="@{/modify_comment/{id}(id=${comment.id})}"
-				th:if="${comment.author.username != null and comment.author.username == #authentication.getPrincipal().getUsername}"
-			  sec:authorize="isAuthenticated" class="btn btn-sm btn-outline-primary">수정</a>
-			
-			<a th:href="@{/delete_comment/{id}(id=${comment.id})}"
-				th:if="${comment.author.username != null and comment.author.username == #authentication.getPrincipal().getUsername}"
-			   sec:authorize="isAuthenticated" class="delete btn btn-sm btn-outline-danger">삭제</a>
-
+      <div th:each="comment, stat : ${freeBoard.comments}" class="card mb-2">
+        <div class="card-body p-2">
+          <div class="d-flex justify-content-between align-items-center mb-1">
+            <h6 class="mb-0 text-muted small">
+              #<span th:text="${stat.index + 1}"></span> |
+              작성자: <span th:text="${comment.author.realname}">작성자</span>
+            </h6>
+            <div>
+              <!-- 삭제 -->
+              <a th:href="@{/delete_comment/{id}(id=${comment.id})}"
+                 th:if="${comment.author.username != null and comment.author.username == #authentication.getPrincipal().getUsername}"
+                 sec:authorize="isAuthenticated"
+                 class="delete btn btn-sm btn-outline-danger"
+                 th:data-uri="@{/delete_comment/{id}(id=${comment.id})}">
+                삭제
+              </a>
+            </div>
           </div>
-        </div>
-
-        <!-- 댓글 내용 -->
-        <p class="card-text mb-1 small" th:text="${comment.content}">댓글 내용</p>
-
-        <!-- 작성일 -->
-        <div class="d-flex justify-content-end">
-          <small class="text-muted">
-            작성일: <span th:text="${#temporals.format(comment.createDate, 'yyyy-MM-dd HH:mm')}">2025-09-16</span>
-          </small>
+          <!-- 댓글 내용 -->
+          <p class="card-text small mb-1" th:text="${comment.content}">댓글 내용</p>
+          <!-- 작성일 -->
+          <div class="d-flex justify-content-end">
+            <small class="text-muted">
+              작성일: <span th:text="${#temporals.format(comment.createDate, 'yyyy-MM-dd HH:mm')}"></span>
+            </small>
+          </div>
         </div>
       </div>
     </div>
-
   </div>
-</div>
 <!-- 자바스크립트 -->
 	<script layout:fragment="script" type="text/javascript">
 
