@@ -1,10 +1,18 @@
 package com.khyuna0.mProject.userinfo;
 
+import java.util.List;
+
+import com.khyuna0.mProject.comment.Comment;
+import com.khyuna0.mProject.reservation.Reservation;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -38,14 +46,14 @@ public class UserInfo {
 	@Column
 	private String userpw; // 유저 비밀번호
 	
-	@Column
+	@Column(unique = true)
 	private String useremail; // 유저 이메일 (아이디 번호처럼 사용)
 	
 	@Column
 	private String realname; // 유저 실명
 	
-	
-	 
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Reservation> reservation; // 유저의 예약 
 
 	
 	

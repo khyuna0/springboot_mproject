@@ -10,6 +10,8 @@
         <span th:text="${#temporals.format(freeBoard.createdate, 'yyyy-MM-dd HH:mm')}">2025-09-15 12:00</span>
         | 조회수:
         <span th:text="${freeBoard.hit}">0</span>
+        | 작성자:
+        <span th:text="${freeBoard.author.realname}">0</span>
       </p>
       <hr>
       <p class="card-text" th:text="${freeBoard.content}">게시글 내용</p>
@@ -48,14 +50,17 @@
         <!-- 상단: 댓글 번호 , 수정/삭제 버튼 -->
         <div class="d-flex justify-content-between align-items-center mb-1">
           <h6 class="mb-0 text-muted">
-            #<span th:text="${stat.index + 1}"></span>
+            #<span th:text="${stat.index + 1}"></span><br>
+            작성자: <span th:text="${comment.author.realname}">작성자</span>
           </h6>
           <div>
 			<a th:href="@{/modify_comment/{id}(id=${comment.id})}"
-			   class="btn btn-sm btn-outline-primary">수정</a>
+				th:if="${comment.author.username != null and comment.author.username == #authentication.getPrincipal().getUsername}"
+			  sec:authorize="isAuthenticated" class="btn btn-sm btn-outline-primary">수정</a>
 			
 			<a th:href="@{/delete_comment/{id}(id=${comment.id})}"
-			   class="btn btn-sm btn-outline-danger">삭제</a>
+				th:if="${comment.author.username != null and comment.author.username == #authentication.getPrincipal().getUsername}"
+			   sec:authorize="isAuthenticated" class="delete btn btn-sm btn-outline-danger">삭제</a>
 
           </div>
         </div>
@@ -75,7 +80,7 @@
   </div>
 </div>
 <!-- 자바스크립트 -->
-<script layout:fragment="script" type="text/javascript">
+	<script layout:fragment="script" type="text/javascript">
 
 	// 삭제
 	const delete_elements = document.getElementsByClassName("delete");

@@ -3,36 +3,36 @@
   <div class="card-body">
     <h3 class="card-title text-center mb-4">상담 예약</h3>
 
-    <form th:action="@{/reserve}" th:object="${reservation}" method="post">
+    <form th:action="@{/reserve}" th:object="${userInfo}" method="post">
       
       <!-- 이름 -->
       <div class="mb-3">
         <label for="name" class="form-label">이름</label>
-        <input id="name" type="text" class="form-control" th:field="*{name}" placeholder="이름을 입력하세요" required>
+        <input id="name" type="text" class="form-control" th:field="*{username}" readonly="readonly" required>
       </div>
 
       <!-- 이메일 -->
       <div class="mb-3">
         <label for="email" class="form-label">이메일</label>
-        <input id="email" type="email" class="form-control" th:field="*{email}" placeholder="이메일 주소" required>
+        <input id="email" type="email" class="form-control" th:field="*{useremail}" readonly="readonly" placeholder="이메일 주소" required>
       </div>
 
       <!-- 상담 날짜 -->
       <div class="mb-3">
-        <label for="date" class="form-label">상담 날짜</label>
-        <input id="date" type="date" class="form-control" th:field="*{date}" required>
-      </div>
-
-      <!-- 상담 시간 -->
-      <div class="mb-3">
-        <label for="time" class="form-label">상담 시간</label>
-        <input id="time" type="time" class="form-control" th:field="*{time}" required>
+        <label for="time" class="form-label">상담 날짜</label>
+        <input id="time" type="time" class="form-control" required>
       </div>
 
       <!-- 상담 주제 -->
       <div class="mb-3">
         <label for="topic" class="form-label">상담 주제</label>
-        <textarea id="topic" class="form-control" rows="3" th:field="*{topic}" placeholder="상담 내용을 간략히 적어주세요"></textarea>
+        <textarea id="topic" class="form-control" rows="3" placeholder="상담 내용을 간략히 적어주세요"></textarea>
+      </div>
+      
+      <!-- 예약 관련 메세지 -->
+      <div class="mb-3">
+        <label for="topic" class="form-label">추가 전달 사항</label>
+        <textarea id="topic" class="form-control" rows="3" placeholder="추가 전달 사항이 있으면 간략히 적어주세요"></textarea>
       </div>
 
       <!-- 버튼 -->

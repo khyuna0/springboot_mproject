@@ -90,7 +90,7 @@ public class FreeBoardController {
 		freeBoard = freeBoardService.getFreeBoard(id);
 		freeBoardService.delete(freeBoard);
 		
-		return "redirect:/freeBoard";
+		return String.format("redirect:/detail/%s", id);
 	}
 	
 }
