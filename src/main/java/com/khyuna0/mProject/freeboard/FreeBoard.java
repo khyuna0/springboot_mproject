@@ -2,6 +2,7 @@ package com.khyuna0.mProject.freeboard;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 import com.khyuna0.mProject.comment.Comment;
 import com.khyuna0.mProject.userinfo.UserInfo;
@@ -13,6 +14,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
@@ -65,4 +67,6 @@ public class FreeBoard {
 	    comment.setFreeBoard(this);
 	}
 	
+	@ManyToMany
+	private Set<UserInfo> Voter;
 }

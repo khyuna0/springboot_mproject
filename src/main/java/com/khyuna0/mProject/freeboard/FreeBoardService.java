@@ -13,6 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.khyuna0.mProject.DataNotFoundException;
+import com.khyuna0.mProject.reviewBoard.ReviewBoard;
 import com.khyuna0.mProject.userinfo.UserInfo;
 
 @Service
@@ -74,4 +75,13 @@ public class FreeBoardService {
 		boardRepository.save(freeboard);
 
 	}
+	
+	public void vote(Integer id, UserInfo user, FreeBoard freeboard) { //추천
+		Optional<FreeBoard> optional = boardRepository.findById(id);
+		
+		if(optional.isPresent()) {
+			freeboard = optional.get();
+			freeboard.getVoter().add(user);
+		}
+	}	
 }

@@ -1,6 +1,8 @@
 package com.khyuna0.mProject.reviewBoard;
 
 import java.time.LocalDateTime;
+import java.util.Set;
+
 import com.khyuna0.mProject.userinfo.UserInfo;
 
 import jakarta.persistence.Column;
@@ -8,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -41,5 +44,6 @@ public class ReviewBoard {
 	@ManyToOne
 	private UserInfo author; // 글쓴이 정보
 	
-	
+	@ManyToMany
+	private Set<UserInfo> Voter;
 }

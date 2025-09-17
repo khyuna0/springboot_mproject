@@ -7,14 +7,15 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 
 
 @SpringBootApplication
-public class SpringbootKhyuna0MProjectApplication extends SpringBootServletInitializer{
+public class SpringbootKhyuna0MProjectApplication {
 
-	@Override
+	/*
+	@Override // extends SpringBootServletInitializer
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
 		// TODO Auto-generated method stub
 		return builder.sources(SpringbootKhyuna0MProjectApplication.class);
 	}
-	
+	*/
 	public static void main(String[] args) {
 		SpringApplication.run(SpringbootKhyuna0MProjectApplication.class, args);
 	}

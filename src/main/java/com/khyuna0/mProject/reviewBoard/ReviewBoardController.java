@@ -93,4 +93,15 @@ public class ReviewBoardController {
 		return "redirect:/reviewBoard";
 	}
 	
+	@GetMapping("/reviewBoard_vote/{id}") // 글 추천
+	@PreAuthorize("isAuthenticated()")
+	public String vote( @PathVariable("id") Integer id, Principal principal, UserInfo user, ReviewBoard reviewBoard) {
+		reviewBoard = reviewBoardService.getReview(id);
+		user = userInfoService.getUser(principal.getName()); 
+		reviewBoardService.vote(id, user, reviewBoard);
+		
+		return String.format("redirect:/reviewBoard_detail/%s", id);
+	}
+	
+	
 }

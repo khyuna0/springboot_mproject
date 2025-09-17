@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.khyuna0.mProject.comment.Comment;
+import com.khyuna0.mProject.reviewBoard.ReviewBoard;
 import com.khyuna0.mProject.userinfo.UserInfo;
 import com.khyuna0.mProject.userinfo.UserInfoService;
 
@@ -93,4 +94,13 @@ public class FreeBoardController {
 		return String.format("redirect:/detail/%s", id);
 	}
 	
+	@GetMapping("/freeBoard_vote/{id}") // 글 추천
+	@PreAuthorize("isAuthenticated()")
+	public String vote( @PathVariable("id") Integer id, Principal principal, UserInfo user, FreeBoard freeBoard) {
+		freeBoard = freeBoardService.getFreeBoard(id);
+		user = userInfoService.getUser(principal.getName()); 
+		freeBoardService.vote(id, user, freeBoard);
+		
+		return String.format("redirect:/reviewBoard_detail/%s", id);
+	}
 }

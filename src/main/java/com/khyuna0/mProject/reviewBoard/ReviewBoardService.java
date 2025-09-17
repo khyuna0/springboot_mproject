@@ -14,9 +14,13 @@ import org.springframework.stereotype.Service;
 
 import com.khyuna0.mProject.DataNotFoundException;
 import com.khyuna0.mProject.userinfo.UserInfo;
+import com.khyuna0.mProject.userinfo.UserInfoService;
 
 @Service
 public class ReviewBoardService {
+	
+	@Autowired
+	public UserInfoService userInfoService;
 	
 	@Autowired 
 	private ReviewBoardRepository reviewBoardRepository;
@@ -72,6 +76,14 @@ public class ReviewBoardService {
 	public void hit(ReviewBoard reviewBoard) { // 글 조회수 증가
 		reviewBoard.setHit(reviewBoard.getHit()+1);
 		reviewBoardRepository.save(reviewBoard);
-
+	}
+		
+	public void vote(Integer id, UserInfo user, ReviewBoard reviewBoard) {
+		Optional<ReviewBoard> optional = reviewBoardRepository.findById(id);
+		
+		if(optional.isPresent()) {
+			reviewBoard = optional.get();
+			reviewBoard.getVoter().add(user);
+		}	
 	}
 }

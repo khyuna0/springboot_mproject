@@ -12,11 +12,15 @@
         <span th:text="${reviewBoard.hit}">0</span>
         | 작성자:
         <span th:text="${reviewBoard.author.realname}">0</span>
+        | 추천수:
+        <span th:text="${reviewBoard.voter == null ? 0 : #lists.size(reviewBoard.voter)}"></span>
       </p>
       <hr>
       <p class="card-text" th:text="${reviewBoard.content}">게시글 내용</p>
       <div class="mt-3">
         <a th:href="@{/reviewBoard}" class="btn btn-secondary btn-sm">목록으로</a>
+        <a th:href="@{/reviewBoard_vote/${reviewBoard.id}" class="vote btn btn-secondary btn-sm" sec:authorize="isAuthenticated">추천하기</a>
+         <a th:href="@{/reviewBoard_vote/${reviewBoard.id}}" sec:authorize="isAuthenticated"  class="vote btn btn-secondary btn-sm">추천하기</a>
         <a th:href="@{|/reviewBoard_modify/${reviewBoard.id}|}" sec:authorize="isAuthenticated" 
         	th:if="${reviewBoard.author.username != null and reviewBoard.author.username == #authentication.getPrincipal().getUsername}" class="btn btn-primary btn-sm">수정하기</a>
         <a th:href="@{|/reviewBoard_delete/${reviewBoard.id}|}" sec:authorize="isAuthenticated" 
