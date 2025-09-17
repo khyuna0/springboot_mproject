@@ -19,7 +19,7 @@
       <tr th:each="board, loop : ${paging}">
         <td th:text="${paging.totalElements - (paging.number * paging.size) - loop.index}"></td>
         <td class="text-start">
-          <a th:href="@{|/detail/${board.id}|}"
+          <a th:href="@{|/reviewBoard_detail/${board.id}|}"
              th:text="${board.subject}"
              class="text-decoration-none fw-semibold"></a>
         </td>

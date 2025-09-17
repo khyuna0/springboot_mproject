@@ -17,9 +17,9 @@
       <p class="card-text" th:text="${reviewBoard.content}">게시글 내용</p>
       <div class="mt-3">
         <a th:href="@{/reviewBoard}" class="btn btn-secondary btn-sm">목록으로</a>
-        <a th:href="@{|/reviewBoard_modify/${freeBoard.id}|}" sec:authorize="isAuthenticated" 
+        <a th:href="@{|/reviewBoard_modify/${reviewBoard.id}|}" sec:authorize="isAuthenticated" 
         	th:if="${reviewBoard.author.username != null and reviewBoard.author.username == #authentication.getPrincipal().getUsername}" class="btn btn-primary btn-sm">수정하기</a>
-        <a th:href="@{|/reviewBoard_delete/${freeBoard.id}|}" sec:authorize="isAuthenticated" 
+        <a th:href="@{|/reviewBoard_delete/${reviewBoard.id}|}" sec:authorize="isAuthenticated" 
          	th:if="${reviewBoard.author.username != null and reviewBoard.author.username == #authentication.getPrincipal().getUsername}" class="delete btn btn-primary btn-sm">삭제하기</a>
       </div>
     </div>
