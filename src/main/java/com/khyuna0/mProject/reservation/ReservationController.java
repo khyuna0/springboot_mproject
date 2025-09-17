@@ -17,7 +17,6 @@ import com.khyuna0.mProject.userinfo.UserInfoService;
 
 import jakarta.validation.Valid;
 
-@PreAuthorize("isAuthenticated()")
 @Controller
 public class ReservationController {
 
@@ -28,6 +27,7 @@ public class ReservationController {
 	private ReservationService reservationService;
 	
 	@GetMapping("/reserve") // 예약 폼
+	@PreAuthorize("isAuthenticated()")
 	public String reserve(Model model, Principal principal) {
 	    UserInfo userinfo = userInfoService.getUser(principal.getName());
 	    ReservationForm reservationForm = new ReservationForm();
@@ -39,6 +39,7 @@ public class ReservationController {
 	}
 	
 	@PostMapping("/reserve")
+	@PreAuthorize("isAuthenticated()")
 	public String reserve(@Valid @ModelAttribute("reservation") ReservationForm reservationForm,
 			BindingResult bindingResult, UserInfo userInfo, Principal principal) {
 		userInfo = userInfoService.getUser(principal.getName());
@@ -52,12 +53,14 @@ public class ReservationController {
 	}
 	
 	@GetMapping("/reserve_delete/{id}")
+	@PreAuthorize("isAuthenticated()")
 	public String reserve_delete(@PathVariable("id") Integer id) {
 		reservationService.delete(id);
 		return "redirect:/mypage";
 	}
 	
 	@PostMapping("/reserve_modify/{id}")
+	@PreAuthorize("isAuthenticated()")
 	public String reserve_modify(@PathVariable("id") Integer id, Model model, Reservation reservation) {
 		reservation = reservationService.getReservation(id);
 		model.addAttribute("reservation", reservation);
@@ -66,6 +69,7 @@ public class ReservationController {
 	}
 	
 	@GetMapping("/reserve_modify/{id}")
+	@PreAuthorize("isAuthenticated()")
 	public String reserve_modify(@PathVariable("id") Integer id, @Valid ReservationForm reservationForm, BindingResult bindingResult,  Principal principal) {
 		if(bindingResult.hasErrors()) {
 			return "reserve_modify";
