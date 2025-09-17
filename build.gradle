@@ -7,7 +7,7 @@ plugins {
 
 group = 'com.khyuna0'
 version = '0.0.1-SNAPSHOT'
-description = 'khyuna0 board project'
+description = 'khyuna0_springboot_mproject'
 
 java {
 	toolchain {
@@ -16,8 +16,8 @@ java {
 }
 
 bootWar { // war 파일 배포파일명
-	archiveBaseName='kboard'
-	archiveFileName='kboard.war'
+	archiveBaseName='CareerBridge'
+	archiveFileName='CareerBridge.war'
 	archiveVersion="0.0.0"
 }
 
