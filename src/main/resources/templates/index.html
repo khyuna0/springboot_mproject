@@ -5,7 +5,7 @@
     <div class="p-5 mb-4 bg-primary text-white rounded-3 shadow-sm text-center">
       <h1 class="display-5 fw-bold">당신의 취업 길잡이, 멘토와 함께</h1>
       <p class="lead">멘토링으로 열어가는 커리어의 첫걸음</p>
-      <a href="/reserve" class="btn btn-light btn-lg mt-2">상담 예약 바로가기</a>
+      <a th:href="@{/reserve}" class="btn btn-light btn-lg mt-2">상담 예약 바로가기</a>
     </div>
 
     <!-- 카드 영역 -->
@@ -16,7 +16,7 @@
           <div class="card-body">
             <h5 class="card-title">멘토와 상담</h5>
             <p class="card-text">전문 멘토와 1:1 상담 예약을 통해 맞춤형 취업 전략을 세워보세요.</p>
-            <a href="/reserve" class="btn btn-primary">상담 예약하기</a>
+            <a th:href="@{/reserve}" class="btn btn-primary">상담 예약하기</a>
           </div>
         </div>
       </div>
@@ -27,7 +27,7 @@
           <div class="card-body">
             <h5 class="card-title">멘토링 후기 게시판</h5>
             <p class="card-text">다른 학생들의 멘토링 경험을 확인하고 함께 성장할 수 있습니다.</p>
-            <a href="/reviewBoard" class="btn btn-outline-primary">후기 보러가기</a>
+            <a th:href="@{/reviewBoard}" class="btn btn-outline-primary">후기 보러가기</a>
           </div>
         </div>
       </div>
