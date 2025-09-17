@@ -1,0 +1,35 @@
+<html layout:decorate="~{layout}">
+  <div layout:fragment="content" class="container mt-5">
+
+    <div class="card shadow-sm">
+      <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">게시글 작성</h4>
+      </div>
+      <div class="card-body">
+        <form th:action="@{/reviewBoard_write}" th:object="${reviewBoard}" method="post">
+          
+          <!-- 제목 -->
+          <div class="mb-3">
+            <label for="subject" class="form-label">제목</label>
+            <input id="subject" type="text" th:field="*{subject}" 
+                   class="form-control" placeholder="제목 입력" required />
+          </div>
+
+          <!-- 내용 -->
+          <div class="mb-3">
+            <label for="content" class="form-label">내용</label>
+            <textarea id="content" th:field="*{content}" 
+                      class="form-control" rows="6" placeholder="내용 입력" required></textarea>
+          </div>
+
+          <!-- 버튼 -->
+          <div class="d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary">등록</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+  </div>
+</html>

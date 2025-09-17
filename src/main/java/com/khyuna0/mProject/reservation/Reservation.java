@@ -1,5 +1,7 @@
 package com.khyuna0.mProject.reservation;
 
+import java.time.LocalDateTime;
+
 import com.khyuna0.mProject.userinfo.UserInfo;
 
 import jakarta.persistence.Column;
@@ -7,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,9 +30,10 @@ public class Reservation {
 	private String message; // 예약 관련 메세지
 	
 	@Column
-	private String reserveDate; // 예약 신청한 시간
+	private LocalDateTime reserveDate; // 예약 신청한 시간
 	
 	@ManyToOne
+	@JoinColumn(name = "USER_ID")
 	private UserInfo user; // 예약한 유저
 	
 }

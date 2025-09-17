@@ -3,7 +3,7 @@
     <div class="card-body">
       <h3 class="card-title text-center mb-4">상담 예약</h3>
 
-      <form th:action="@{/reserve}" th:object="${reservation}" method="post">
+      <form th:action="@{/reserve_modify/{id}(id=${reservation.id})}" th:object="${reservation}" method="post">
 		<div th:replace="~{form_errors :: formErrorsFragment}"></div>
         <!-- 이름 -->
         <div class="mb-3">
@@ -28,7 +28,7 @@
                  min="2025-09-17T09:00" 
                  max="2025-12-31T20:00" 
                  step="1800">
-          <small class="text-muted">상담 가능 시간: 오전 9시 ~ 오후 8시 (정시 단위로만 선택 가능합니다.)</small>
+          <small class="text-muted">상담 가능 시간: 오전 9시 ~ 오후 8시</small>
         </div>
 
         <!-- 상담 주제 -->

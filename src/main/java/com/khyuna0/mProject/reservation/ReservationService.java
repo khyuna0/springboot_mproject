@@ -1,12 +1,16 @@
 package com.khyuna0.mProject.reservation;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
 
 import com.khyuna0.mProject.DataNotFoundException;
 import com.khyuna0.mProject.userinfo.UserInfo;
+
+import jakarta.validation.Valid;
 
 @Service
 public class ReservationService {
@@ -14,7 +18,7 @@ public class ReservationService {
 	@Autowired
 	private ReservationRepository reservationRepository;
 	
-	public void create(UserInfo user, String subject, String message, String reserveDate ) { // 예약
+	public void create(UserInfo user, String subject, String message, LocalDateTime reserveDate ) { // 예약
 		
 		Reservation reservation = new Reservation();
 		reservation.setSubject(subject);
@@ -35,7 +39,7 @@ public class ReservationService {
 		reservationRepository.deleteById(id);
 	}
 	
-	public void modify(Integer id, String subject, String message, String reserveDate) { // 예약수정
+	public void modify(Integer id,  String subject, String message, LocalDateTime reserveDate) { // 예약수정
 		Optional<Reservation> reOptional = reservationRepository.findById(id);
 		if(reOptional.isPresent()) {
 			Reservation reservation = new Reservation();

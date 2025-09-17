@@ -44,7 +44,7 @@ public class UserInfoController {
 	            userInfo.getRealname());
 	        
 	    } catch (DataIntegrityViolationException e) {
-	        bindingResult.reject("joinFailed", "이미 등록된 사용자입니다.");
+	        bindingResult.reject("joinFailed", "이미 등록된 사용자 이메일 또는 아이디입니다.");
 	        return "join";
 	    } catch (Exception e) {
 	        bindingResult.reject("joinFailed", e.getMessage());
