@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.khyuna0.mProject.comment.Comment;
+import com.khyuna0.mProject.rComment.RComment;
 import com.khyuna0.mProject.userinfo.UserInfo;
 import com.khyuna0.mProject.userinfo.UserInfoService;
 
@@ -36,9 +38,10 @@ public class ReviewBoardController {
 	}//
 	
 	@GetMapping("/reviewBoard_detail/{id}")
-	public String detail(Model model, @PathVariable("id") Integer id) { // 선택한 글 상세 보기
+	public String detail(Model model, @PathVariable("id") Integer id, RComment comment) { // 선택한 글 상세 보기
 		reviewBoardService.hit(reviewBoardService.getReview(id));
 		ReviewBoard reviewBoard = reviewBoardService.getReview(id);
+		
 		
 		model.addAttribute("reviewBoard", reviewBoard);
 		return "reviewBoard_detail";

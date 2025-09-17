@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.khyuna0.mProject.comment.Comment;
-import com.khyuna0.mProject.reviewBoard.ReviewBoard;
 import com.khyuna0.mProject.userinfo.UserInfo;
 import com.khyuna0.mProject.userinfo.UserInfoService;
 
